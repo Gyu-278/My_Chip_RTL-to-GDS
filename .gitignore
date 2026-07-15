@@ -1,0 +1,26 @@
+# Upstream design kit clone (GoodKook/ETRI-0.5um-CMOS-MPW-Std-Cell-DK, 3.1G)
+ETRI-0.5um-CMOS-MPW-Std-Cell-DK/
+
+# Open-source EDA tool source builds
+build/
+
+# Personal notes / helper (not part of the practice work)
+docs/
+scripts/
+
+# 3rd-party MPW submission (GoodKook's tapeout GDS)
+work/_ANSWER_/
+
+# Build & simulation artifacts
+obj_dir/
+*.vcd
+*.o
+*.a
+*.gtkw
+sc_glcd128x64_TB
+# Compiled TB executables (no extension)
+templated_class
+sc_delta_cycle_TB
+sc_dff_TB
+sc_glcd128x64_TB
+Vpong_SbS
