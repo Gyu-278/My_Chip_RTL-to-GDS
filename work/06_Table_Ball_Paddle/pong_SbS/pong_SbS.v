@@ -6,7 +6,7 @@
 `define TABLE_WIDTH     128
 `define TABLE_HEIGHT    64
 
-module pong_SbS(clk, reset, x_pos, y_pos, pixel, p_tick, busy);
+module pong_SbS(clk, reset, x_pos, y_pos, pixel, p_tick, busy, up, down);
 input           clk;
 input           reset;
 output [6:0]    x_pos;
@@ -14,6 +14,8 @@ output [5:0]    y_pos;
 output          pixel;
 output          p_tick;
 input           busy;
+input           up;
+input           down;
 
     reg [6:0]   x_pos;
     reg [5:0]   y_pos;
@@ -130,11 +132,38 @@ input           busy;
     wire [2:0]  rom_bit;
     assign rom_bit = x_pos - x_ball;
 
-//    assign pixel = rom_data[rom_bit];
+    // Paddle Postion -----------------------------------------------
+    reg [5:0]   paddle;
+    always @(posedge clk or posedge reset)
+    begin
+        if (reset)
+        begin
+            paddle <= 0;
+        end
+        else
+        begin
+            if (up && paddle > 0 && v_sync)
+                paddle <= paddle - 1;
+            if (down && paddle < 44 && v_sync)
+                paddle <= paddle + 1;
+        end
+    end
+
+    // Table --------------------------------------------------------
+    wire pixel_table = ((x_pos>5) && (x_pos<15))? 1:0;
+    // Ball ---------------------------------------------------------
+    reg pixel_ball;
     always @*
         if ((x_ball<=x_pos) && ((x_ball+7)>=x_pos) &&
             (y_ball<=y_pos) && ((y_ball+7)>=y_pos))
-            pixel = rom_data[rom_bit];
+            pixel_ball = rom_data[rom_bit];
         else
-            pixel = 0;
+            pixel_ball = 0;
+    // Paddle -------------------------------------------------------
+    wire pixel_paddle;
+    assign pixel_paddle = ((x_pos>122) && (y_pos>paddle) && (y_pos<(paddle+20)))? 1:0;
+
+    // Pixel --------------------------------------------------------
+    assign pixel = (pixel_table ^ pixel_ball) | pixel_paddle;
+
 endmodule
