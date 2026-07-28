@@ -1,0 +1,25 @@
+# Synthesis script for yosys created by qflow
+read_liberty -lib -ignore_miss_dir -setattr blackbox /hai/home/pgh/.conda/envs/chip-eda/share/qflow/tech/etri050/etri05_stdcells.lib
+read_verilog -sv /hai/home/pgh/project/PGH_Chip_Open_Source/work/pong_pt1/ETRI050/source/pong_pt1.v
+read_verilog -sv pixel_gen.v
+
+# High-level synthesis
+synth -top pong_pt1
+# Map register flops
+dfflibmap -liberty /hai/home/pgh/.conda/envs/chip-eda/share/qflow/tech/etri050/etri05_stdcells.lib
+opt
+
+# Map combinatorial cells, standard script
+abc -exe /hai/home/pgh/.conda/envs/chip-eda/share/qflow/bin/yosys-abc -liberty /hai/home/pgh/.conda/envs/chip-eda/share/qflow/tech/etri050/etri05_stdcells.lib -script +strash;scorr;ifraig;retime,{D};strash;dch,-f;map,-M,1,{D}
+flatten
+setundef -zero
+
+clean -purge
+# Output buffering
+iopadmap -outpad BUFX2 A:Y -bits
+# Cleanup
+opt
+clean
+rename -enumerate
+write_verilog  pong_pt1_mapped.v
+stat
