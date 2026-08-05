@@ -11,7 +11,7 @@
 - **IDEC**: [https://www.idec.or.kr/edu/apply/view/?&type=list&no=2613](https://www.idec.or.kr/edu/apply/view/?&type=list&no=2613)
 - **환경**: 서버 `Turtle` (Rocky Linux 8.10), conda env `chip-eda`
 
-overview
+![overview](notes/assets/overview.png)
 
 정말 괜찮은 강좌라 생각이 들어서, 전체적으로 한번 프로젝트를 수행해보며 공부해보고자 한다.
 
