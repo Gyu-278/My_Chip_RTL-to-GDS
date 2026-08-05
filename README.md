@@ -34,7 +34,7 @@
 - 5의 경우, github 상에서 잘 열리지 않아, 노션 주소를 첨부한다. 활용하는 TR의 Layout 모습과 GDS까지 확인할 수 있다. 
 - [https://app.notion.com/p/Synthesis-GDS-Chip-top-39dbfb069c118035833de4f457dd010c?source=copy_link](https://app.notion.com/p/Synthesis-GDS-Chip-top-39dbfb069c118035833de4f457dd010c?source=copy_link)
 
-**GDS — 최종 칩 완성본** (코어 + I/O 패드 링 + 패드-코어 배선)
+**GDS — 최종 칩 완성본** (코어 + I/O 패드 링 + 패드-코어 배선, 일부만 수행)
 
 ![최종 GDS](notes/assets/5-synthesis-gds-chiptop/image_48.png)
 
@@ -53,6 +53,8 @@ My_Chip_RTL-to-GDS/
     ├── systemc_basics/        #   1일차: dff, ex1~3, dffrs
     ├── 01_Table ~ 06_*        #   2일차: 탁구 게임 RTL 시뮬 (래스터→GLCD→공→패들)
     └── pong_pt1/              #   3일차: 백엔드 (RTL, SystemC/VPI TB, APR 설정)
+
+# 실제로는 위 3일 과정에 대해 약 한달 간 추가 학습
 ```
 
 - 예제 소스는 원본 킷([GoodKook/ETRI-0.5um-…](https://github.com/GoodKook/ETRI-0.5um-CMOS-MPW-Std-Cell-DK))을 복사·수정한 것이며, 비상업적 학습 용도로 원본의 CC BY-NC 라이선스를 따른다. 자세한 출처는 [ATTRIBUTION.md](ATTRIBUTION.md) 참고.
